@@ -19,6 +19,15 @@ const findAllProducts = async (req, res) => {
                 deleted: { [sequelize_1.Op.eq]: 0 },
                 ...(Boolean(req.query.search) && {
                     [sequelize_1.Op.or]: [{ productName: { [sequelize_1.Op.like]: `%${req.query.search}%` } }]
+                }),
+                ...(Boolean(req.query.productCategoryId1) && {
+                    productCategoryId1: { [sequelize_1.Op.eq]: req.query.productCategoryId1 }
+                }),
+                ...(Boolean(req.query.productCategoryId2) && {
+                    productCategoryId2: { [sequelize_1.Op.eq]: req.query.productCategoryId2 }
+                }),
+                ...(Boolean(req.query.productCategoryId3) && {
+                    productCategoryId3: { [sequelize_1.Op.eq]: req.query.productCategoryId3 }
                 })
             },
             include: [

@@ -11,11 +11,11 @@ const middlewares_1 = require("../../middlewares");
 const category3_1 = require("../../controllers/category3");
 const category3Routes = (app) => {
     const router = express_1.default.Router();
-    app.use('/api/v1/category3', middlewares_1.middleware.useAuthorization, router);
+    app.use('/api/v1/category3', router);
     router.get('/', async (req, res) => await category3_1.category3Controller.findAll(req, res));
     router.get('/detail/', async (req, res) => await category3_1.category3Controller.findOne(req, res));
-    router.post('/', async (req, res) => await category3_1.category3Controller.create(req, res));
-    router.patch('/', async (req, res) => await category3_1.category3Controller.update(req, res));
-    router.delete('/', async (req, res) => await category3_1.category3Controller.remove(req, res));
+    router.post('/', middlewares_1.middleware.useAuthorization, async (req, res) => await category3_1.category3Controller.create(req, res));
+    router.patch('/', middlewares_1.middleware.useAuthorization, async (req, res) => await category3_1.category3Controller.update(req, res));
+    router.delete('/', middlewares_1.middleware.useAuthorization, async (req, res) => await category3_1.category3Controller.remove(req, res));
 };
 exports.category3Routes = category3Routes;

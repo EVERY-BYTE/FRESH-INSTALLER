@@ -25,7 +25,9 @@ const findAllOrder = async (req, res) => {
                 deleted: { [sequelize_1.Op.eq]: 0 },
                 ...(Boolean(user?.dataValues.userRole === 'user') && {
                     orderUserId: { [sequelize_1.Op.eq]: req.body?.user?.userId },
-                    orderStatus: { [sequelize_1.Op.not]: 'done' }
+                    orderStatus: {
+                        [sequelize_1.Op.notIn]: ['done']
+                    }
                 }),
                 ...(Boolean(req.query?.orderStatus) && {
                     orderStatus: { [sequelize_1.Op.eq]: req.query.orderStatus }
